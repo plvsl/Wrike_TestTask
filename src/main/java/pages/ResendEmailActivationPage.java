@@ -35,9 +35,8 @@ public class ResendEmailActivationPage extends BasicPage {
     @Step("Check that \"Resend Email Page\" is opened")
     public void checkResendEmailActivationPageIsOpened() {
         wait.until(ExpectedConditions.titleIs("Thank you for choosing Wrike!"));
-
         assertThat(driver.getCurrentUrl())
-                .as("")
+                .as("'Resend Email Page' is opened")
                 .isEqualTo("https://www.wrike.com/resend/");
 
         assertThat(driver.getTitle())
@@ -52,8 +51,10 @@ public class ResendEmailActivationPage extends BasicPage {
             driver.switchTo().frame(iframe);
             iframeNO.click();
             driver.switchTo().defaultContent();
-        } catch (TimeoutException ignored) {}
+        } catch (TimeoutException ignored) {
+        }
     }
+
     @Step("Check that answers are submitted")
     public void checkAnswersAreSubmitted() {
         wait.until(ExpectedConditions.visibilityOf(successSubmittedWindow));
@@ -61,21 +62,24 @@ public class ResendEmailActivationPage extends BasicPage {
                 .as("Answers on QA sections are submitted")
                 .isTrue();
     }
+
     @Step("Click on \"Resend email\"")
     public void resendEmail() {
         resendEmailButton.click();
     }
+
     @Step("Check that email is resend")
     public void checkEmailIsResend() {
         wait.until(ExpectedConditions.invisibilityOf(resendEmailButton));
         assertThat(resendEmailButton.isDisplayed())
-                .as("Check resend email")
+                .as("Button 'Resend email' is not active")
                 .isFalse();
 
         assertThat(textOfEmailActivation.getText())
-                .as("")
+                .as("Text on the right side of page is correct")
                 .isEqualTo(expectedTextOfEmailActivation);
     }
+
     public static class SelectionForm {
 
         int randInterestInSolution;
@@ -85,42 +89,44 @@ public class ResendEmailActivationPage extends BasicPage {
         @FindBy(xpath = "//div[@data-code='interest_in_solution']//button")
         private List<WebElement> interestInSolutionButtons;
         @FindBy(xpath = "//div[@data-code='interest_in_solution']//input")
-        private List<WebElement> interestInSolutionButtonsInput;
+        private List<WebElement> interestInSolutionInput;
         @FindBy(xpath = "//div[@data-code='team_members']//button")
         private List<WebElement> teamMembersButtons;
         @FindBy(xpath = "//div[@data-code='team_members']//input")
-        private List<WebElement> teamMembersButtonsInput;
+        private List<WebElement> teamMembersInput;
         @FindBy(xpath = "//div[@data-code='primary_business']//button")
         private List<WebElement> managingWorkProcessButtons;
         @FindBy(xpath = "//div[@data-code='primary_business']//input")
-        private List<WebElement> managingWorkProcessButtonsInput;
+        private List<WebElement> managingWorkProcessInput;
         @FindBy(xpath = "//div[@class='survey']//button[@type='submit']")
         private WebElement submit;
 
-        @Step("Fill in the Q&A section with random generated answers)")
+        @Step("Fill in the Q&A section with random generated answers")
         public void fillQASection() {
-            randInterestInSolution = new Random().nextInt(2);
-            randTeamMembersButtons = new Random().nextInt(5);
-            randManagingWork = new Random().nextInt(3);
+            randInterestInSolution = new Random().nextInt(1);
+            randTeamMembersButtons = new Random().nextInt(4);
+            randManagingWork = new Random().nextInt(2);
 
             interestInSolutionButtons.get(randInterestInSolution).click();
             teamMembersButtons.get(randTeamMembersButtons).click();
             managingWorkProcessButtons.get(randManagingWork).click();
         }
-        @Step("Check that right buttons are selected")
-        public void checkThatRightButtonsAreSelected() {
-            assertThat(interestInSolutionButtonsInput.get(randInterestInSolution).isSelected())
-                    .as("check that selected buttons are selected")
+
+        @Step("Check that correct buttons are selected")
+        public void checkThatCorrectButtonsAreSelected() {
+            assertThat(interestInSolutionInput.get(randInterestInSolution).isSelected())
+                    .as("Correct button is selected")
                     .isTrue();
 
-            assertThat(teamMembersButtonsInput.get(randTeamMembersButtons).isSelected())
-                    .as("check that selected buttons are selected")
+            assertThat(teamMembersInput.get(randTeamMembersButtons).isSelected())
+                    .as("Correct button is selected")
                     .isTrue();
 
-            assertThat(managingWorkProcessButtonsInput.get(randManagingWork).isSelected())
-                    .as("check that selected buttons are selected")
+            assertThat(managingWorkProcessInput.get(randManagingWork).isSelected())
+                    .as("Correct button is selected")
                     .isTrue();
         }
+
         @Step("Submit answers")
         public void submitSelections() {
             submit.click();

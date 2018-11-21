@@ -58,7 +58,7 @@ public class TestTask {
         resendEmailActivationPage.checkResendEmailActivationPageIsOpened();
         resendEmailActivationPage.closeIframe();
         resendEmailActivationPage.selectionForm.fillQASection();
-        resendEmailActivationPage.selectionForm.checkThatRightButtonsAreSelected();
+        resendEmailActivationPage.selectionForm.checkThatCorrectButtonsAreSelected();
         resendEmailActivationPage.selectionForm.submitSelections();
         resendEmailActivationPage.checkAnswersAreSubmitted();
         resendEmailActivationPage.resendEmail();

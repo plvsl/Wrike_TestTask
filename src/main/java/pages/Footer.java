@@ -16,13 +16,13 @@ public class Footer extends ResendEmailActivationPage {
     @Step("Check that section \"Follow us\" on footer contains the \"Twitter\" button with correct url")
     public void checkFollowUsSectionContainsTwitterButtonAndHaveCorrectURL() {
         assertThat(twitterLink.getAttribute("href"))
-                .as("")
+                .as("'Twitter' button has correct url")
                 .isEqualTo("https://twitter.com/wrike");
     }
     @Step("Check that \"Twitter\" icon is displayed")
     public void checkTwitterButtonCorrectIcon() {
         assertThat(twitterIcon.isDisplayed())
-                .as("")
+                .as("'Twitter' icon is displayed")
                 .isTrue();
     }
 }

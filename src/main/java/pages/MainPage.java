@@ -15,6 +15,7 @@ public class MainPage extends BasicPage {
     public void openSite() {
         driver.get("https://www.wrike.com/");
     }
+
     @Step("Click \"Get started for free\" button")
     public void getStartedForFree() {
         submitButton.click();
@@ -34,11 +35,10 @@ public class MainPage extends BasicPage {
         public void fillEmailField() {
             emailTextBox.sendKeys(email);
         }
+
         @Step("Click on \"Create my Wrike account\" button")
         public void createWrikeAccount() {
             createWrikeAccountButton.click();
         }
-
     }
-
 }
