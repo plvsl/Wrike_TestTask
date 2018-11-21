@@ -6,12 +6,21 @@ import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
-import pages.Page;
+import pages.BasicPage;
+import pages.Footer;
+import pages.MainPage;
+import pages.ResendEmailActivationPage;
+
+import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 public class TestTask {
+    //TODO
+    static Properties prop = new Properties();
 
     private WebDriver driver;
-    private Page page;
+    private MainPage mainPage;
+    private ResendEmailActivationPage resendEmailActivationPage;
 
     @BeforeClass
     public static void setupClass() {
@@ -22,7 +31,15 @@ public class TestTask {
     public void beforeTest() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        page = PageFactory.initElements(driver, Page.class);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+
+        BasicPage.driver = driver;
+        mainPage = PageFactory.initElements(driver, MainPage.class);
+        mainPage.startFreeTrialPopUp =  PageFactory.initElements(driver, MainPage.StartFreeTrialPopUp.class);
+        resendEmailActivationPage = PageFactory.initElements(driver, ResendEmailActivationPage.class);
+        resendEmailActivationPage.selectionForm = PageFactory.initElements(driver, ResendEmailActivationPage.SelectionForm.class);
+        resendEmailActivationPage.footer = PageFactory.initElements(driver, Footer.class);
     }
 
     @After
@@ -34,10 +51,19 @@ public class TestTask {
 
     @Test
     public void test() {
-        page.openSite(driver);
-        page.getStartedForFree();
-        page.fillEmailField(driver);
-        page.createWrikeAccount(driver);
-        page.fillQASection(driver);
+        mainPage.openSite();
+        mainPage.getStartedForFree();
+        mainPage.startFreeTrialPopUp.fillEmailField();
+        mainPage.startFreeTrialPopUp.createWrikeAccount();
+        resendEmailActivationPage.checkResendEmailActivationPageIsOpened();
+        resendEmailActivationPage.closeIframe();
+        resendEmailActivationPage.selectionForm.fillQASection();
+        resendEmailActivationPage.selectionForm.checkThatRightButtonsAreSelected();
+        resendEmailActivationPage.selectionForm.submitSelections();
+        resendEmailActivationPage.checkAnswersAreSubmitted();
+        resendEmailActivationPage.resendEmail();
+        resendEmailActivationPage.checkEmailIsResend();
+        resendEmailActivationPage.footer.checkFollowUsSectionContainsTwitterButtonAndHaveCorrectURL();
+        resendEmailActivationPage.footer.checkTwitterButtonCorrectIcon();
     }
 }
