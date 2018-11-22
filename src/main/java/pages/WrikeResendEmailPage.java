@@ -6,15 +6,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ResendEmailActivationPage extends BasicPage {
+public class WrikeResendEmailPage extends BasicPage {
     public SelectionForm selectionForm;
 
-    private MainPage.StartFreeTrialPopUp startFreeTrialPopUp;
+    private WrikeMainPage.StartFreeTrialPopUp startFreeTrialPopUp;
     private String email = startFreeTrialPopUp.email;
     private final String expectedTextOfEmailActivation = "We’ve sent you an activation email\nat " + email +
             " again. Please check your inbox and follow the link to complete your registration.";
@@ -32,8 +33,11 @@ public class ResendEmailActivationPage extends BasicPage {
     @FindBy(xpath = "//p[@class='h4 subtitle']")
     private WebElement textOfEmailActivation;
 
+    public WrikeResendEmailPage() throws IOException {
+    }
+
     @Step("Check that \"Resend Email Page\" is opened")
-    public void checkResendEmailActivationPageIsOpened() {
+    public void checkResendEmailPageIsOpened() {
         wait.until(ExpectedConditions.titleIs("Thank you for choosing Wrike!"));
         assertThat(driver.getCurrentUrl())
                 .as("'Resend Email Page' is opened")

@@ -5,6 +5,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasicPage {
     public static WebDriver driver;
-    public Footer footer;
+    public WrikeFooter wrikeFooter;
     WebDriverWait wait = new WebDriverWait(driver, 5);
 }

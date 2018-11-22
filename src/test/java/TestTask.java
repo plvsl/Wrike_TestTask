@@ -7,20 +7,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.PageFactory;
 import pages.BasicPage;
-import pages.Footer;
-import pages.MainPage;
-import pages.ResendEmailActivationPage;
+import pages.WrikeFooter;
+import pages.WrikeMainPage;
+import pages.WrikeResendEmailPage;
 
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class TestTask {
-    //TODO
-    static Properties prop = new Properties();
 
     private WebDriver driver;
-    private MainPage mainPage;
-    private ResendEmailActivationPage resendEmailActivationPage;
+    private WrikeMainPage wrikeMainPage;
+    private WrikeResendEmailPage wrikeResendEmailPage;
 
     @BeforeClass
     public static void setupClass() {
@@ -35,11 +32,11 @@ public class TestTask {
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 
         BasicPage.driver = driver;
-        mainPage = PageFactory.initElements(driver, MainPage.class);
-        mainPage.startFreeTrialPopUp =  PageFactory.initElements(driver, MainPage.StartFreeTrialPopUp.class);
-        resendEmailActivationPage = PageFactory.initElements(driver, ResendEmailActivationPage.class);
-        resendEmailActivationPage.selectionForm = PageFactory.initElements(driver, ResendEmailActivationPage.SelectionForm.class);
-        resendEmailActivationPage.footer = PageFactory.initElements(driver, Footer.class);
+        wrikeMainPage = PageFactory.initElements(driver, WrikeMainPage.class);
+        wrikeMainPage.startFreeTrialPopUp =  PageFactory.initElements(driver, WrikeMainPage.StartFreeTrialPopUp.class);
+        wrikeResendEmailPage = PageFactory.initElements(driver, WrikeResendEmailPage.class);
+        wrikeResendEmailPage.selectionForm = PageFactory.initElements(driver, WrikeResendEmailPage.SelectionForm.class);
+        wrikeResendEmailPage.wrikeFooter = PageFactory.initElements(driver, WrikeFooter.class);
     }
 
     @After
@@ -51,19 +48,19 @@ public class TestTask {
 
     @Test
     public void test() {
-        mainPage.openSite();
-        mainPage.getStartedForFree();
-        mainPage.startFreeTrialPopUp.fillEmailField();
-        mainPage.startFreeTrialPopUp.createWrikeAccount();
-        resendEmailActivationPage.checkResendEmailActivationPageIsOpened();
-        resendEmailActivationPage.closeIframe();
-        resendEmailActivationPage.selectionForm.fillQASection();
-        resendEmailActivationPage.selectionForm.checkThatCorrectButtonsAreSelected();
-        resendEmailActivationPage.selectionForm.submitSelections();
-        resendEmailActivationPage.checkAnswersAreSubmitted();
-        resendEmailActivationPage.resendEmail();
-        resendEmailActivationPage.checkEmailIsResend();
-        resendEmailActivationPage.footer.checkFollowUsSectionContainsTwitterButtonAndHaveCorrectURL();
-        resendEmailActivationPage.footer.checkTwitterButtonCorrectIcon();
+        wrikeMainPage.openSite();
+        wrikeMainPage.getStartedForFree();
+        wrikeMainPage.startFreeTrialPopUp.fillEmailField();
+        wrikeMainPage.startFreeTrialPopUp.createWrikeAccount();
+        wrikeResendEmailPage.checkResendEmailPageIsOpened();
+        wrikeResendEmailPage.closeIframe();
+        wrikeResendEmailPage.selectionForm.fillQASection();
+        wrikeResendEmailPage.selectionForm.checkThatCorrectButtonsAreSelected();
+        wrikeResendEmailPage.selectionForm.submitSelections();
+        wrikeResendEmailPage.checkAnswersAreSubmitted();
+        wrikeResendEmailPage.resendEmail();
+        wrikeResendEmailPage.checkEmailIsResend();
+        wrikeResendEmailPage.wrikeFooter.checkFollowUsSectionContainsTwitterButtonAndHaveCorrectURL();
+        wrikeResendEmailPage.wrikeFooter.checkTwitterButtonCorrectIcon();
     }
 }

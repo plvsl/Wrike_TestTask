@@ -5,15 +5,17 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class MainPage extends BasicPage {
+public class WrikeMainPage extends BasicPage {
     public StartFreeTrialPopUp startFreeTrialPopUp;
+
+    private final String URL = "https://www.wrike.com/";
 
     @FindBy(xpath = "//div[@class='r']//button[@type='submit']")
     private WebElement submitButton;
 
     @Step("Open url: wrike.com")
     public void openSite() {
-        driver.get("https://www.wrike.com/");
+        driver.get(URL);
     }
 
     @Step("Click \"Get started for free\" button")
@@ -22,9 +24,10 @@ public class MainPage extends BasicPage {
     }
 
     public static class StartFreeTrialPopUp {
-
+        static final String EMAIL_LAST_PART = "@wriketask.qaa";
         static private String generatedString = RandomStringUtils.randomAlphabetic(10);
-        static String email = generatedString + "@wriketask.qaa";
+        static String email = generatedString + EMAIL_LAST_PART;
+
 
         @FindBy(xpath = "//label[@class='modal-form-trial__label']/input")
         private WebElement emailTextBox;
