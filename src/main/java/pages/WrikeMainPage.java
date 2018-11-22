@@ -30,7 +30,7 @@ public class WrikeMainPage extends BasicPage {
 
         @FindBy(xpath = "//label[@class='modal-form-trial__label']/input")
         private WebElement emailTextBox;
-        @FindBy(xpath = "//label[@class='modal-form-trial__label'] /button")
+        @FindBy(xpath = "//label[@class='modal-form-trial__label']/button")
         private WebElement createWrikeAccountButton;
 
         @Step("Fill email field with random generated value")
