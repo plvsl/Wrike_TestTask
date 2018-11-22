@@ -29,7 +29,7 @@ public class TestTask {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
 
         BasicPage.driver = driver;
         wrikeMainPage = PageFactory.initElements(driver, WrikeMainPage.class);
