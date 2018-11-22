@@ -25,7 +25,7 @@ public class WrikeMainPage extends BasicPage {
 
     public static class StartFreeTrialPopUp {
         static final String EMAIL_LAST_PART = "@wriketask.qaa";
-        static private String generatedString = RandomStringUtils.randomAlphabetic(10);
+        static String generatedString = RandomStringUtils.randomAlphabetic(10);
         static String email = generatedString + EMAIL_LAST_PART;
 
         @FindBy(xpath = "//label[@class='modal-form-trial__label']/input")
