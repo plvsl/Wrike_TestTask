@@ -28,7 +28,6 @@ public class WrikeMainPage extends BasicPage {
         static private String generatedString = RandomStringUtils.randomAlphabetic(10);
         static String email = generatedString + EMAIL_LAST_PART;
 
-
         @FindBy(xpath = "//label[@class='modal-form-trial__label']/input")
         private WebElement emailTextBox;
         @FindBy(xpath = "//label[@class='modal-form-trial__label'] /button")
